@@ -2,6 +2,7 @@
 import { LOGO_IMAGE, SITE } from "@config";
 import Hr from "./Hr.astro";
 import LinkButton from "./LinkButton.astro";
+import LanguagePicker from "../components/LanguagePicker.astro";
 
 import logoPNG from "/assets/logo.png";
 import logoSVG from "/assets/logo.svg";
@@ -111,6 +112,7 @@ const { activeNav } = Astro.props;
               )
             }
           </li>
+          <li><LanguagePicker /></li>
         </ul>
       </nav>
     </div>
