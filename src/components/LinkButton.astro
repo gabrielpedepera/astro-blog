@@ -1,17 +1,28 @@
 ---
+import { getLangFromUrl } from "@i18n/utils";
+
 export interface Props {
   href: string;
   className?: string;
   ariaLabel?: string;
   title?: string;
   disabled?: boolean;
+  i18n?: boolean;
 }
 
-const { href, className, ariaLabel, title, disabled = false } = Astro.props;
+const { href, className, ariaLabel, title, disabled = false, i18n = false } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+
+function buildHref(href: string, disabled: boolean, i18n: boolean) {
+  if (disabled) return "#";
+  if (i18n) return `/${lang}${href}`;
+
+  return href;
+};
 ---
 
 <a
-  href={disabled ? "#" : href}
+  href={buildHref(href, disabled, i18n)}
   tabindex={disabled ? "-1" : "0"}
   class={`group inline-block ${className}`}
   aria-label={ariaLabel}

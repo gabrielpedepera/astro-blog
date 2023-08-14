@@ -3,6 +3,7 @@ import { LOGO_IMAGE, SITE } from "@config";
 import Hr from "./Hr.astro";
 import LinkButton from "./LinkButton.astro";
 import LanguagePicker from "../components/LanguagePicker.astro";
+import { getLangFromUrl } from "@i18n/utils";
 
 import logoPNG from "/assets/logo.png";
 import logoSVG from "/assets/logo.svg";
@@ -12,13 +13,14 @@ export interface Props {
 }
 
 const { activeNav } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
 ---
 
 <header>
   <a id="skip-to-content" href="#main-content">Skip to content</a>
   <div class="nav-container">
     <div class="top-nav-wrap">
-      <a href="/" class="logo">
+      <a href=`/${lang}` class="logo">
         {
           LOGO_IMAGE.enable ? (
             <img
@@ -60,17 +62,26 @@ const { activeNav } = Astro.props;
         </button>
         <ul id="menu-items" class="display-none sm:flex">
           <li>
-            <a href="/posts" class={activeNav === "posts" ? "active" : ""}>
+            <a
+              href=`/${lang}/posts`
+              class={activeNav === "posts" ? "active" : ""}
+            >
               Posts
             </a>
           </li>
           <li>
-            <a href="/tags" class={activeNav === "tags" ? "active" : ""}>
+            <a
+              href=`/${lang}/tags`
+              class={activeNav === "tags" ? "active" : ""}
+            >
               Tags
             </a>
           </li>
           <li>
-            <a href="/about" class={activeNav === "about" ? "active" : ""}>
+            <a
+              href=`/${lang}/about`
+              class={activeNav === "about" ? "active" : ""}
+            >
               About
             </a>
           </li>
@@ -82,6 +93,7 @@ const { activeNav } = Astro.props;
               }`}
               ariaLabel="search"
               title="Search"
+              i18n={true}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
