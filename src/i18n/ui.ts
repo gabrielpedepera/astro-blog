@@ -7,12 +7,13 @@ export const defaultLang = "en";
 
 export const ui = {
   en: {
-    "nav.home": "Home",
+    "nav.posts": "Posts",
+    "nav.tags": "Tags",
     "nav.about": "About",
-    "nav.twitter": "Twitter",
   },
   "pt-BR": {
-    "nav.home": "Página Inicial",
+    "nav.posts": "Posts",
+    "nav.tags": "Tags",
     "nav.about": "Sobre",
   },
 } as const;

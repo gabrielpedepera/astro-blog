@@ -3,7 +3,7 @@ import { LOGO_IMAGE, SITE } from "@config";
 import Hr from "./Hr.astro";
 import LinkButton from "./LinkButton.astro";
 import LanguagePicker from "../components/LanguagePicker.astro";
-import { getLangFromUrl } from "@i18n/utils";
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
 
 import logoPNG from "/assets/logo.png";
 import logoSVG from "/assets/logo.svg";
@@ -14,6 +14,7 @@ export interface Props {
 
 const { activeNav } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <header>
@@ -66,7 +67,7 @@ const lang = getLangFromUrl(Astro.url);
               href=`/${lang}/posts`
               class={activeNav === "posts" ? "active" : ""}
             >
-              Posts
+              {t("nav.posts")}
             </a>
           </li>
           <li>
@@ -74,7 +75,7 @@ const lang = getLangFromUrl(Astro.url);
               href=`/${lang}/tags`
               class={activeNav === "tags" ? "active" : ""}
             >
-              Tags
+              {t("nav.tags")}
             </a>
           </li>
           <li>
@@ -82,7 +83,7 @@ const lang = getLangFromUrl(Astro.url);
               href=`/${lang}/about`
               class={activeNav === "about" ? "active" : ""}
             >
-              About
+              {t("nav.about")}
             </a>
           </li>
           <li>
@@ -143,7 +144,7 @@ const lang = getLangFromUrl(Astro.url);
     @apply relative flex w-full items-start justify-between p-4 sm:items-center sm:py-8;
   }
   .logo {
-    @apply absolute py-1 text-xl font-semibold sm:static sm:text-2xl;
+    @apply absolute py-1 text-xl font-semibold sm:absolute sm:text-2xl;
   }
   .hamburger-menu {
     @apply self-end p-2 sm:hidden;
