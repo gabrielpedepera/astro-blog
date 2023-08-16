@@ -1,36 +1,28 @@
 ---
 layout: ../../layouts/AboutLayout.astro
-title: "About"
+title: "Sobre"
 ---
 
-AstroPaper is a minimal, responsive and SEO-friendly Astro blog theme. I designed and crafted this based on [my personal blog](https://satnaing.dev/blog).
+Bem-vindo ao meu cantinho na internet! Meu nome é Gabriel Pereira, e sou um experiente Engenheiro de Software com mais de 13 anos de experiência prática na criação de soluções digitais.
 
-This theme is aimed to be accessible out of the box. Light and dark mode are supported by
-default and additional color schemes can also be configured.
+Desde os primeiros momentos da minha carreira, senti-me atraído pelo processo de resolver problemas. O que fez com que me torna-se um engenheiro de software especialista em backend, também com entendimento de arquitetura de sistemas, estruturas de dados e algoritmos. Além de escrever código, estou profundamente envolvido na filosofia das práticas DevOps e Extreme Programming. Essa perspectiva abrangente me permite projetar não apenas aplicações, mas sistemas confiáveis e escaláveis que resistem ao teste do tempo.
 
-This theme is self-documented \_ which means articles/posts in this theme can also be considered as documentations. So, see the documentation for more info.
+Embora a tecnologia permaneça no núcleo da minha profissão, acredito na abordagem holística da engenharia de software. Sou um defensor de que entender as necessidades do usuário, colaborar de maneira harmoniosa com equipes multidisciplinares e priorizar um design elegante são tão importantes quanto escrever um código impecável.
+
+Ultimamente, fixei meu olhar em um novo horizonte: o mundo da Arquitetura de Software. A perspectiva de moldar sistemas inteiros, conceber sua estrutura e orientar equipes me empolga. É um caminho que estou ansioso para explorar, pois acredito no crescimento e aprendizado contínuos.
+
+Quando não estou imerso em linhas de código ou contemplando designs de sistemas, provavelmente você me encontrará brincando com meus filhos, assistindo animes com minha esposa, ou tentando tocar alguma música com minha guitarra ou Ukulele. A vida é uma jornada de evolução constante, e estou empolgado para compartilhar meus insights, experiências e perspectivas com você por meio deste blog.
+
+Sinta-se à vontade para entrar em contato, se conectar, e vamos nessa jornada juntos!
+
+~~Busque conhecimento,~~  
+~~ET Bilu~~
+
+Mantenha-se curioso,  
+Gabriel Pereira
 
 <div>
   <img src="/assets/dev.svg" class="sm:w-1/2 mx-auto" alt="coding dev illustration">
 </div>
 
-## Tech Stack
-
-This theme is written in vanilla JavaScript (+ TypeScript for type checking) and a little bit of ReactJS for some interactions. TailwindCSS is used for styling; and Markdown is used for blog contents.
-
-## Features
-
-Here are certain features of this site.
-
-- fully responsive and accessible
-- SEO-friendly
-- light & dark mode
-- fuzzy search
-- super fast performance
-- draft posts
-- pagination
-- sitemap & rss feed
-- highly customizable
-
-If you like this theme, you can star/contribute to the [repo](https://github.com/satnaing/astro-paper).  
-Or you can even give any feedback via my [email](mailto:contact@satnaing.dev).
+Este blog utiliza [AstroPaper](https://github.com/satnaing/astro-paper). Um básico, responsivo e SEO-amigável Astro blog tema.
