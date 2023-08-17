@@ -13,6 +13,7 @@ ogImage: https://res.cloudinary.com/noezectz/v1663745737/astro-paper/astropaper-
 description:
   Step by step process of connecting Astro-Paper blog theme with Forestry
   Headless CMS.
+lang: en
 ---
 
 > Important!!! Forestry is going to be discontinued on April 22nd, 2023. You can [read their announcement](https://forestry.io/blog/forestry.io-end-of-life/) for more info.

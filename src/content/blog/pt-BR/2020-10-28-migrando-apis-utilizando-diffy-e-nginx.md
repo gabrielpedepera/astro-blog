@@ -11,6 +11,7 @@ tags:
   - rubocop
 ogImage: "/uploads/diffy-diagram.png"
 description: Diffy e NGINX para migrar APIs com confiança.
+lang: "pt-BR"
 ---
 
 Recentemente tive a oportunidade de participar de um projeto envolvendo a migração de algumas APIs das quais gostaria de compartilhar um pouco sobre essa experiência. Minha ideia não é abordar o motivo pelo qual essas APIs foram migradas, mas sim a estratégia que foi utilizada para que esse processo fosse executado de maneira segura e bem sucedida.

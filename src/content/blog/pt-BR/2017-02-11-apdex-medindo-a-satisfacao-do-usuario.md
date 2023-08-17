@@ -11,6 +11,7 @@ tags:
   - metricas
 ogImage: ""
 description: "Apdex: Medindo a Satisfação do Usuário"
+lang: "pt-BR"
 ---
 
 No time que estou trabalhando atualmente, o [New Relic APM](https://newrelic.com/application-monitoring) é uma das ferramentas que mais utilizamos para monitorar nossas aplicações em ambiente de produção. Ele oferece visualizações agrupadas para diagnóstico rápido de problemas, permitindo ser analisado solicitações específicas sobre métricas de desempenho por tempo de resposta, throughput e tamanho de transferência de dados.

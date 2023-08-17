@@ -14,6 +14,7 @@ tags:
   - ansible
 ogImage: ""
 description: Ambiente de desenvolvimento com Vagrant e Ansible
+lang: "pt-BR"
 ---
 
 O [Vagrant](https://www.vagrantup.com) é uma ferramenta para construir e gerenciar máquinas virtuais. Com um fluxo de trabalho fácil de usar e foco na automação, o Vagrant reduz o tempo de configuração do ambiente de desenvolvimento e faz com que a desculpa "funciona na minha máquina" se torne uma desculpa do passado.

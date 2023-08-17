@@ -12,6 +12,7 @@ tags:
   - sublime-text-3
 ogImage: ""
 description: Padronize seu código Ruby com Rubocop
+lang: "pt-BR"
 ---
 
 Recentemente, no time que estou trabalhando, notei durante os [code reviews](https://en.wikipedia.org/wiki/Code_review) muitas ponderações relacionadas a estilo do código. Como por exemplo:

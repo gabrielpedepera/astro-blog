@@ -11,6 +11,7 @@ tags:
   - rubocop
 ogImage: ""
 description: "Visual Studio Code + Rubocop"
+lang: "pt-BR"
 ---
 
 Nos últimos 4 anos vinha utilizando o [Sublime Text](https://www.sublimetext.com/) como meu editor padrão de desenvolvimento, porém recentemente optei por trocá-lo e venho utilizando o [Visual Studio Code](https://code.visualstudio.com/) como meu editor de desenvolvimento padrão, nunca fui um grande fã da Microsoft, mas posso realmente dizer que estou muito satisfeito com o editor, e todo o ecosistema dele me agrada muito, por ser [open-source](https://github.com/Microsoft/vscode), pelos [plugins e temas disponíveis](https://marketplace.visualstudio.com/VSCode), a performance e a forma como que é atualizado, gosto muito dos documentos de releases liberados a cada [atualização](https://code.visualstudio.com/updates/).
