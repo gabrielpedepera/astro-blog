@@ -16,6 +16,7 @@ export const ui: { [key: string]: any } = {
     "posts.previous": "Prev",
     "posts.next": "Next",
     "posts.description": "All the articles I've posted.",
+    "footer.all_rights_reserved": "All rights reserved.",
   },
   "pt-BR": {
     "nav.posts": "Posts",
@@ -27,5 +28,6 @@ export const ui: { [key: string]: any } = {
     "posts.previous": "Anterior",
     "posts.next": "Próximo",
     "posts.description": "Todos os posts publicados.",
+    "footer.all_rights_reserved": "Todos os direitos reservados.",
   },
 } as const;

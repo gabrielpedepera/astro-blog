@@ -10,7 +10,7 @@ import slugify from "@utils/slugify";
 import type { CollectionEntry } from "astro:content";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
 
-const lang = getLangFromUrl(Astro.url);
+const lang = getLangFromUrl(Astro.url) as string;
 const t = useTranslations(lang);
 
 export interface Props {

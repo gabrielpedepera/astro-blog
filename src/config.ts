@@ -4,7 +4,7 @@ export const SITE: Site = {
   website: "https://gabrielpereira.dev/",
   author: "Gabriel Pereira",
   desc: "Personal blog to share ideas, thoughts, and content mainly but not exclusively related to software development.",
-  title: "Gabriel Pereira",
+  title: "@gabrielpedepera",
   ogImage: "astropaper-og.jpg",
   lightAndDarkMode: true,
   postPerPage: 5,
