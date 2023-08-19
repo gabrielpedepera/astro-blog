@@ -6,9 +6,9 @@ postSlug: migrando-apis-utilizando-diffy-e-nginx/
 featured: false
 draft: false
 tags:
-  - vscode
-  - visual studio code
-  - rubocop
+  - NGINX
+  - Diffy
+  - APIs
 ogImage: "/uploads/diffy-diagram.png"
 description: Diffy e NGINX para migrar APIs com confiança.
 lang: "pt-BR"
@@ -29,18 +29,20 @@ Vamos conhecer um pouco das nossas aplicações:
 
 `docker-compose.yml`
 
-    version: "3"
-    services:
-      primary:
-        image: diffy/example-service:production
-        container_name: primary
-        ports:
-          - 8080:5000
-      candidate:
-        image: diffy/example-service:candidate
-        container_name: candidate
-        ports:
-          - 8081:5000
+```yaml
+version: "3"
+services:
+  primary:
+    image: diffy/example-service:production
+    container_name: primary
+    ports:
+      - 8080:5000
+  candidate:
+    image: diffy/example-service:candidate
+    container_name: candidate
+    ports:
+      - 8081:5000
+```
 
 Iniciando as aplicações:
 
@@ -48,17 +50,17 @@ Iniciando as aplicações:
 $ docker-compose up
 ```
 
-Vamos fazer alguns testes após levantar as aplicações, a aplicação primária está respondendo através da porta `8080` e a aplicação candidata na porta `8081`.
+Vamos fazer alguns testes após levantar as aplicações, a aplicação primária está respondendo através da porta `8080` e a aplicação candidata na porta `8081`
 
 Nos screenshots estou utilizando o [HTTPie](https://httpie.org/ "HTTPie").
 
 **Primária:**
 
-![Imagem que contém um request sendo feito para a aplicação primária e obtendo uma resposta de sucesso.](/uploads/http-app-primaria.jpg "Curl request para a aplicação primária.")
+![Imagem que contém um request sendo feito para a aplicação primária e obtendo uma resposta de sucesso.](/assets/uploads/http-app-primaria.jpg "Curl request para a aplicação primária.")
 
 **Candidata:**
 
-![Imagem que contém um request sendo feito para a aplação candidata e obtendo uma resposta de sucesso.](/uploads/http-app-candidate.jpg "Curl request para a aplicação candidata")
+![Imagem que contém um request sendo feito para a aplação candidata e obtendo uma resposta de sucesso.](/assets/uploads/http-app-candidate.jpg "Curl request para a aplicação candidata")
 
 Se você verificar a documentação da imagem [https://hub.docker.com/r/diffy/example-service](https://hub.docker.com/r/diffy/example-service "https://hub.docker.com/r/diffy/example-service") vai perceber que a mesma disponibiliza 4 endpoints:
 
@@ -76,7 +78,7 @@ Por fins de demonstração, vamos realizar a migração de apenas uma API, que n
 
 O [Twitter](https://twitter.com "Twitter") tornou essa ferramenta pública em 2015, publicando junto esse [artigo](https://blog.twitter.com/engineering/en_us/a/2015/diffy-testing-services-without-writing-tests.html "Blog Post Twitter") do qual explica um pouco do seu funcionamento. Atualmente a mesma está arquivada pelo Twitter, porém vem sido mantida pela organização [OpenDiffy](https://github.com/opendiffy/diffy "OpenDiffy").
 
-Retirando do próprio [README](https://github.com/opendiffy/diffy#what-is-diffy "README Diffy") do Diffy e em uma tradução livre:
+Retirado do próprio [README](https://github.com/opendiffy/diffy#what-is-diffy "README Diffy") do Diffy e em uma tradução livre:
 
 > Diffy encontra potenciais bugs em seu serviço acessando instâncias do seu serviço onde contém sua nova implementação e sua antiga implementação lado a lado. Diffy se comporta como um proxy repassando qualquer requisição que receba para cada uma das instâncias (nova e antiga implementação). Em seguida, ele compara as respostas e relata quaisquer diferenças que possam surgir. A premissa do Diffy é que se duas implementações do serviço retornam respostas “semelhantes” para um conjunto suficientemente grande e diverso de solicitações, então as duas implementações podem ser tratadas como equivalentes e a implementação mais recente é livre de regressão.
 
@@ -88,38 +90,40 @@ Voltando ao nosso cenário fictício do qual estamos simulando a migração de u
 
 `docker-compose.yml`
 
-    version: "3"
-    services:
-      primary:
-        image: diffy/example-service:production
-        container_name: primary
-        ports:
-          - 8080:5000
-      candidate:
-        image: diffy/example-service:candidate
-        container_name: candidate
-        ports:
-          - 8081:5000
-      diffy:
-        image: diffy/diffy
-        container_name: diffy
-        ports:
-          - 3000:8888
-          - 3001:8880
-        command: >
-          -master.primary='primary:5000'
-          -master.secondary='primary:5000'
-          -candidate='candidate:5000'
-          -service.protocol='http'
-          -serviceName='Diffy Testing Service'
-          -proxy.port=:8880
-          -admin.port=:8881
-          -http.port=:8888
-          -rootUrl='localhost:8888'
-          -summary.email=''
-        links:
-          - primary
-          - candidate
+```yaml
+version: "3"
+services:
+  primary:
+    image: diffy/example-service:production
+    container_name: primary
+    ports:
+      - 8080:5000
+  candidate:
+    image: diffy/example-service:candidate
+    container_name: candidate
+    ports:
+      - 8081:5000
+  diffy:
+    image: diffy/diffy
+    container_name: diffy
+    ports:
+      - 3000:8888
+      - 3001:8880
+    command: >
+      -master.primary='primary:5000'
+      -master.secondary='primary:5000'
+      -candidate='candidate:5000'
+      -service.protocol='http'
+      -serviceName='Diffy Testing Service'
+      -proxy.port=:8880
+      -admin.port=:8881
+      -http.port=:8888
+      -rootUrl='localhost:8888'
+      -summary.email=''
+    links:
+      - primary
+      - candidate
+```
 
 Este fluxograma ilustra como o Diffy funciona:
 
@@ -131,17 +135,17 @@ No nosso caso, vamos definir a mesma instância da aplicação primária como se
 
 Com essa configuração a interface web do Diffy pode ser acessada via browser através da URL `http://localhost:3000`
 
-![Imagem do Admin do Diffy sem nenhum dado](/uploads/diffy-localhost-3000.png "Diffy Admin")
+![Imagem do Admin do Diffy sem nenhum dado](/assets/uploads/diffy-localhost-3000.png "Diffy Admin")
 
 E podemos interagir com o Diffy proxy através da URL: `http://localhost:3001`
 
-![Imagem que contém um request sendo feito para a aplicação primária e obtendo uma resposta de sucesso.](/uploads/success-diffy-test.png "Curl request para a aplicação primária")
+![Imagem que contém um request sendo feito para a aplicação primária e obtendo uma resposta de sucesso.](/assets/uploads/success-diffy-test.png "Curl request para a aplicação primária")
 
-![Imagem que contém um request sendo feito para a aplicação candidata e obtendo uma resposta de sucesso.](/uploads/regression-diffy-test.png "Curl request para a aplicação candidata")
+![Imagem que contém um request sendo feito para a aplicação candidata e obtendo uma resposta de sucesso.](/assets/uploads/regression-diffy-test.png "Curl request para a aplicação candidata")
 
 Na requisição eu também adicionei o header `Canonical-Resource` apenas para referenciar a API que estava utilizando, essa informação é útil para que o Diffy possa exibir em sua interface também.
 
-![Imagem do Diffy Admin depois de serem realizados os requests demonstrando os dados para comparação.](/uploads/diffy-interface-success.png "Diffy Admin com dados")![Imagem do Diffy Admin depois de serem realizados os requests demonstrando os dados que obtiveram diferenças entre a aplicação primária e candidata.](/uploads/diffy-interface-regression.png "Diffy Admin focando os requests com diferenças")![Imagem do Diffy Admin focando exatamente no dado que foi diferente na resposta entre a aplicação primária e candidata.](/uploads/diffy-interface-regression-detailed.png "Diffy Admin com foco nos dados que foram diferentes")
+![Imagem do Diffy Admin depois de serem realizados os requests demonstrando os dados para comparação.](/assets/uploads/diffy-interface-success.png "Diffy Admin com dados")![Imagem do Diffy Admin depois de serem realizados os requests demonstrando os dados que obtiveram diferenças entre a aplicação primária e candidata.](/assets/uploads/diffy-interface-regression.png "Diffy Admin focando os requests com diferenças")![Imagem do Diffy Admin focando exatamente no dado que foi diferente na resposta entre a aplicação primária e candidata.](/assets/uploads/diffy-interface-regression-detailed.png "Diffy Admin com foco nos dados que foram diferentes")
 
 Algumas coisas a serem observadas:
 
@@ -162,75 +166,80 @@ Sendo assim, vamos aplicar algumas mudanças na forma como estamos expondo nosso
 
 `docker-compose.yml`
 
-    version: "3"
-    services:
-      primary:
-        image: diffy/example-service:production
-        container_name: primary
-      candidate:
-        image: diffy/example-service:candidate
-        container_name: candidate
-      diffy:
-        image: diffy/diffy
-        container_name: diffy
-        ports:
-          - 3000:8888
-        command: >
-          -master.primary='primary:5000'
-          -master.secondary='primary:5000'
-          -candidate='candidate:5000'
-          -service.protocol='http'
-          -serviceName='Diffy Testing Service'
-          -proxy.port=:8880
-          -admin.port=:8881
-          -http.port=:8888
-          -rootUrl='localhost:8888'
-          -summary.email=''
-        links:
-          - primary
-          - candidate
-      proxy-reverse:
-        build: .
-        container_name: proxy-reverse
-        ports:
-          - 8080:80
-        links:
-          - primary
-          - candidate
-          - diffy
+```yaml
+version: "3"
+services:
+  primary:
+    image: diffy/example-service:production
+    container_name: primary
+  candidate:
+    image: diffy/example-service:candidate
+    container_name: candidate
+  diffy:
+    image: diffy/diffy
+    container_name: diffy
+    ports:
+      - 3000:8888
+    command: >
+      -master.primary='primary:5000'
+      -master.secondary='primary:5000'
+      -candidate='candidate:5000'
+      -service.protocol='http'
+      -serviceName='Diffy Testing Service'
+      -proxy.port=:8880
+      -admin.port=:8881
+      -http.port=:8888
+      -rootUrl='localhost:8888'
+      -summary.email=''
+    links:
+      - primary
+      - candidate
+  proxy-reverse:
+    build: .
+    container_name: proxy-reverse
+    ports:
+      - 8080:80
+    links:
+      - primary
+      - candidate
+      - diffy
+```
 
 `Dockerfile`
 
-    FROM nginx:stable-alpine
-
-    COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+```Dockerfile
+FROM nginx:stable-alpine
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+```
 
 `nginx.conf`
 
-    upstream primary {
-      server primary:5000;
-    }
+```nginx
+upstream primary {
+  server primary:5000;
+}
 
-    upstream candidate {
-      server candidate:5000;
-    }
+upstream candidate {
+  server candidate:5000;
+}
 
-    upstream diffy {
-      server diffy:8880;
-    }
+upstream diffy {
+  server diffy:8880;
+}
 
-    server {
-      listen 80;
-      server_name "nginx-diffy-proxy";
+server {
+  listen 80;
+  server_name "nginx-diffy-proxy";
 
-      location / {
-        proxy_pass http://primary;
-      }
-    }
+  location / {
+    proxy_pass http://primary;
+  }
+}
+```
 
 O diretório e os arquivos estão organizados nessa estrutura:
 
-![Imagem mostrando que o no diretório existem três arquivos no mesmo nível, sendo o Dockerfile, o docker-compose.yml e o nginx.conf](/uploads/tree-repository.jpg "Comando tree")
+![Imagem mostrando que o no diretório existem três arquivos no mesmo nível, sendo o Dockerfile, o docker-compose.yml e o nginx.conf](/assets/uploads/tree-repository.jpg "Comando tree")
 
 Com essa configuração, nós continuamos com a aplicação primária acessível via porta `8080` como havíamos planejado e apenas o Diffy Admin acessível através da porta `3000`. Propositalmente foi removido o acesso da aplicação candidata, uma vez que queremos garantir que a mesma esteja funcionando corretamente antes de deixá-la exposta. Também foi removido o acesso externo ao Diffy Proxy com o intuito de garantir que todas as requisições ao mesmo sejam realizadas dentro do nosso contexto, evitando possíveis ruídos de requisições externas. O que nos leva a próxima etapa do nosso processo.
 
@@ -244,64 +253,66 @@ Analisando essa descrição, podemos perceber que está muito relacionado com o 
 
 `nginx.conf`
 
-    upstream primary {
-      server primary:5000;
-    }
+```nginx
+upstream primary {
+  server primary:5000;
+}
 
-    upstream candidate {
-      server candidate:5000;
-    }
+upstream candidate {
+  server candidate:5000;
+}
 
-    upstream diffy {
-      server diffy:8880;
-    }
+upstream diffy {
+  server diffy:8880;
+}
 
-    # Retrieve the request path for proxy it to Diffy via header
-    map $request_uri $request_uri_no_parameters {
-      "~^(?P<path>.*?)(\?.*)*$" $path;
-    }
+# Retrieve the request path for proxy it to Diffy via header
+map $request_uri $request_uri_no_parameters {
+  "~^(?P<path>.*?)(\?.*)*$" $path;
+}
 
-    server {
-      listen 80;
-      server_name "nginx-diffy-proxy";
+server {
+  listen 80;
+  server_name "nginx-diffy-proxy";
 
-      location / {
-        proxy_pass http://primary;
-      }
+  location / {
+    proxy_pass http://primary;
+  }
 
-      location /success {
-        # Mirroring only /success endpoint
-        mirror /mirror;
-        mirror_request_body on;
+  location /success {
+    # Mirroring only /success endpoint
+    mirror /mirror;
+    mirror_request_body on;
 
-        # Header to identify that the request was mirrored
-        add_header X-Will-Mirror 'Yes';
-        proxy_pass http://primary;
-      }
+    # Header to identify that the request was mirrored
+    add_header X-Will-Mirror 'Yes';
+    proxy_pass http://primary;
+  }
 
-      location = /mirror {
-        internal;
+  location = /mirror {
+    internal;
 
-        proxy_set_header Canonical-Resource $request_uri_no_parameters;
-        proxy_set_header X-Original-Host $host;
+    proxy_set_header Canonical-Resource $request_uri_no_parameters;
+    proxy_set_header X-Original-Host $host;
 
-        proxy_pass http://diffy$request_uri;
-      }
-    }
+    proxy_pass http://diffy$request_uri;
+  }
+}
+```
 
 Com essa configuração todos os endpoints continuam a ser respondidos pela nossa aplicação primária, porém as requisições que são feitas para o endpoint `/success` são espelhadas para o Diffy, que irá fazer a comparação das respostas entre a aplicação primária e candidata e fornecer dados sobre as mesmas, nos dando insumos para avaliar o quanto confiável está nossa aplicação candidata. Vamos checar se nossa configuração ficou correta, e que tudo está a correr como o planejado.
 
 Ao realizar uma requisição para o endpoint `/success` podemos verificar que o mesmo está respondendo corretamente, e também podemos verificar que a requisição foi espelhada para o Diffy através do header `X-Will-Mirror` do qual adicionamos em nossa configuração:
 
-![Na imagem é possível ver o header que foi adicionado demonstrando que a requisição foi espelhada.](/uploads/success-happy-tester-mirror.png "Cur Request para o endpoint /success")
+![Na imagem é possível ver o header que foi adicionado demonstrando que a requisição foi espelhada.](/assets/uploads/success-happy-tester-mirror.png "Cur Request para o endpoint /success")
 
 Podemos notar que o mesmo header não é adicionado ao endpoint `/regression`, ou seja, o mesmo não é espelhado para o Diffy como o endpoint `/success`:
 
-![Imagem mostrando que a resposta não contém o header que foi adicionado, ou seja, essa requisição não foi espelhada.](/uploads/regression-happy-tester-mirror.png "Curl request para o endpoint /regression")
+![Imagem mostrando que a resposta não contém o header que foi adicionado, ou seja, essa requisição não foi espelhada.](/assets/uploads/regression-happy-tester-mirror.png "Curl request para o endpoint /regression")
 
 Também podemos acessar o Diffy e verificar se os dados estão lá para serem analisados:
 
-![Imagem demonstrando a requisição feita anteriormente para ser comparada via o Diffy](/uploads/diffy-testing-success-endpoint.png "Diffy Admin Interface")
+![Imagem demonstrando a requisição feita anteriormente para ser comparada via o Diffy](/assets/uploads/diffy-testing-success-endpoint.png "Diffy Admin Interface")
 
 Voilà!! Até então tudo funcionando como planejado. Com isso, podemos deixar nossos serviços funcionando por um tempo, monitorar via Diffy como nossa aplicação candidata está se comportando e aplicar mudanças se necessárias. Uma vez que tenhamos confiança em nossa aplicação candidata, podemos prosseguir para o próximo passo, do qual seria de fato tornar nossa aplicação candidata exclusivamente responsável pelo endpoint `/success`.
 
@@ -311,35 +322,37 @@ Vamos supor que passamos alguns dias monitorando o Diffy e tudo está correndo b
 
 `nginx.conf`
 
-    upstream primary {
-      server primary:5000;
-    }
+```nginx
+upstream primary {
+  server primary:5000;
+}
 
-    upstream candidate {
-      server candidate:5000;
-    }
+upstream candidate {
+  server candidate:5000;
+}
 
-    server {
-      listen 80;
-      server_name "nginx-diffy-proxy";
+server {
+  listen 80;
+  server_name "nginx-diffy-proxy";
 
-      location / {
-        proxy_pass http://primary;
-      }
+  location / {
+    proxy_pass http://primary;
+  }
 
-      location /success {
-        # Header to identify that the request
-        # It is being handled by the candidate service
-        add_header X-Candidate-Service 'Yes';
-        proxy_pass http://candidate;
-      }
-    }
+  location /success {
+    # Header to identify that the request
+    # It is being handled by the candidate service
+    add_header X-Candidate-Service 'Yes';
+    proxy_pass http://candidate;
+  }
+}
+```
 
 Com essa configuração, foi removido o Diffy e a configuração `mirror` do nosso cenário, uma vez que já o utilizamos do seu propósito para validar que nossa aplicação candidata está apta. Sendo assim, finalmente podemos direcionar todas as requisições do endpoint `/success` para a aplicação candidata.
 
-![Imagem demonstrando que a aplicação candidata está sendo responsável pelo endpoint /success](/uploads/success-happy-tester.png "Cur Request para o endpoint /success")
+![Imagem demonstrando que a aplicação candidata está sendo responsável pelo endpoint /success](/assets/uploads/success-happy-tester.png "Cur Request para o endpoint /success")
 
-![Imagem demonstrando que o endpoint /regression continua sobre responsabilidade da aplicação primária.](/uploads/regression-happy-tester.png "Curl request para o endpoint /regression")
+![Imagem demonstrando que o endpoint /regression continua sobre responsabilidade da aplicação primária.](/assets/uploads/regression-happy-tester.png "Curl request para o endpoint /regression")
 
 ## Conclusão
 
