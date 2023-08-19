@@ -3,6 +3,8 @@ import { useEffect, useRef, useState, useMemo } from "react";
 import Card from "@components/Card";
 import slugify from "@utils/slugify";
 import type { BlogFrontmatter } from "@content/_schemas";
+import { LOCALE } from "@config";
+import { useTranslations } from "@i18n/utils";
 
 export type SearchItem = {
   title: string;
@@ -12,6 +14,7 @@ export type SearchItem = {
 
 interface Props {
   searchList: SearchItem[];
+  lang?: string;
 }
 
 interface SearchResult {
@@ -19,7 +22,8 @@ interface SearchResult {
   refIndex: number;
 }
 
-export default function SearchBar({ searchList }: Props) {
+export default function SearchBar({ searchList, lang = LOCALE }: Props) {
+  const t = useTranslations(lang);
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputVal, setInputVal] = useState("");
   const [searchResults, setSearchResults] = useState<SearchResult[] | null>(
@@ -86,7 +90,7 @@ export default function SearchBar({ searchList }: Props) {
         border-opacity-40 bg-skin-fill py-3 pl-10
         pr-3 placeholder:italic placeholder:text-opacity-75 
         focus:border-skin-accent focus:outline-none"
-          placeholder="Search for anything..."
+          placeholder={t("search.anything")}
           type="text"
           name="search"
           value={inputVal}

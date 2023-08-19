@@ -6,9 +6,16 @@ import Main from "@layouts/Main.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import Search from "@components/Search";
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
+
+const lang = getLangFromUrl(Astro.url) as string;
+const t = useTranslations(lang);
 
 // Retrieve all articles
-const posts = await getCollection("blog", ({ data }) => !data.draft);
+const posts = await getCollection(
+  "blog",
+  ({ data }) => !data.draft && data.lang == lang
+);
 
 // List of items to search in
 const searchList = posts.map(({ data }) => ({
@@ -20,8 +27,8 @@ const searchList = posts.map(({ data }) => ({
 
 <Layout title={`Search | ${SITE.title}`}>
   <Header activeNav="search" />
-  <Main pageTitle="Search" pageDesc="Search any article ...">
-    <Search client:load searchList={searchList} />
+  <Main pageTitle={t("nav.search")} pageDesc={t("search.any_article")}>
+    <Search client:load searchList={searchList} lang={lang} />
   </Main>
   <Footer />
 </Layout>
