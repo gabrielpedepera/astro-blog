@@ -1,13 +1,20 @@
 import Datetime from "./Datetime";
 import type { BlogFrontmatter } from "@content/_schemas";
+import { LOCALE } from "@config";
 
 export interface Props {
   href?: string;
   frontmatter: BlogFrontmatter;
   secHeading?: boolean;
+  lang?: string;
 }
 
-export default function Card({ href, frontmatter, secHeading = true }: Props) {
+export default function Card({
+  href,
+  frontmatter,
+  secHeading = true,
+  lang = LOCALE,
+}: Props) {
   const { title, pubDatetime, description } = frontmatter;
   return (
     <li className="my-6">
@@ -25,7 +32,7 @@ export default function Card({ href, frontmatter, secHeading = true }: Props) {
           </h3>
         )}
       </a>
-      <Datetime datetime={pubDatetime} />
+      <Datetime datetime={pubDatetime} lang={lang} />
       <p>{description}</p>
     </li>
   );
