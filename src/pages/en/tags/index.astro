@@ -7,8 +7,10 @@ import Main from "@layouts/Main.astro";
 import Tag from "@components/Tag.astro";
 import getUniqueTags from "@utils/getUniqueTags";
 import { SITE } from "@config";
+import { getLangFromUrl } from "@i18n/utils";
 
-const posts = await getCollection("blog");
+const lang = getLangFromUrl(Astro.url);
+const posts = await getCollection("blog", ({ data }) => data.lang == lang);
 
 let tags = getUniqueTags(posts);
 ---
