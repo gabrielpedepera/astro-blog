@@ -57,7 +57,7 @@ $ vagrant init bento/ubuntu-16.04
 
 Obs: Nesse tutorial irei utilizar o diretório `workspace/development-box` para os arquivos referentes ao provisionamento do máquina virutal e `workspace` como diretório compartilhado com a máquina virtual, contendo a(s) aplicação(ões). Mas você pode escolher os diretórios que mais lhe agradar.
 
-![vagrant-init](/public/img/posts/2017/07/09/vagrant-init-1.gif)
+![vagrant-init](/assets/img/posts/2017/07/09/vagrant-init-1.gif)
 
 Abra o arquivo `Vagrantfile` gerado pelo comando anterior. Para editá-lo como o exemplo abaixo:
 
@@ -95,7 +95,7 @@ Agora, podemos começar a construir o nosso `playbook.yml` que nosso Vagrantfile
 $ ansible-galaxy install zzet.rbenv abtris.nginx-passenger jpnewman.redis fanatid.nvm geerlingguy.elasticsearch geerlingguy.memcached geerlingguy.postgresql -p roles/
 ```
 
-![ansible-galaxy](/public/img/posts/2017/07/09/ansible-galaxy-1.gif)
+![ansible-galaxy](/assets/img/posts/2017/07/09/ansible-galaxy-1.gif)
 
 Crie o arquivo `~/workspace/development-box/playbook.yml` e o edite conforme abaixo:
 
@@ -182,7 +182,7 @@ Fique a vontade para adicionar pacotes que seja necessário para seu ambiente de
 
 Seguindo uma dica do [@akitaonrails](https://twitter.com/akitaonrails), que foi publicada em seu [blog](http://www.akitaonrails.com/2016/09/21/ubuntu-16-04-lts-xenial-on-vagrant-on-vmware-fusion):
 
-![http://www.akitaonrails.com/2016/09/21/ubuntu-16-04-lts-xenial-on-vagrant-on-vmware-fusion](/public/img/posts/2017/07/09/Screen-Shot-2017-06-20-at-22-22-39.png)
+![http://www.akitaonrails.com/2016/09/21/ubuntu-16-04-lts-xenial-on-vagrant-on-vmware-fusion](/assets/img/posts/2017/07/09/Screen-Shot-2017-06-20-at-22-22-39.png)
 
 Para configurar o locale da sua máquina virtual para UTF-8, basta editar o arquivo `playbook.yml` como abaixo:
 
@@ -295,7 +295,7 @@ E agora devemos criar os templates mencionados no arquivo:
 $ mkdir -p roles/nginx/templates && touch roles/nginx/templates/virtualhost.conf.j2 && touch roles/nginx/templates/passenger.conf.j2
 ```
 
-```j2
+```nginx
 # roles/nginx/templates/virtualhost.conf.j2
 
 server {
@@ -308,7 +308,7 @@ server {
 }
 ```
 
-```j2
+```nginx
 # roles/nginx/templates/passenger.conf.j2
 
 passenger_root {{ passenger_root.stdout }};
@@ -434,7 +434,7 @@ No começo desse tutorial adicionamos o IP 192.168.50.4 ao `Vagrantfile`, e agor
 E basta acessar a URL em seu navegador:
 
 http://localhost.rails_app.dev
-![rails_app](/public/img/posts/2017/07/09/Screen-Shot-2017-07-09-at-16-57-24.png)
+![rails_app](/assets/img/posts/2017/07/09/Screen-Shot-2017-07-09-at-16-57-24.png)
 
 Você pode conferir todo o resultado e código gerado no [Github](https://github.com/gabrielpedepera/development-box).
 
