@@ -103,7 +103,4 @@ O Apdex pode ser tornar um ponto de referência crítico para medir a satisfaç�
 
 #### Leia mais sobre
 
-- [http://www.apdex.org/overview.html](http://www.apdex.org/overview.html){:target="\_blank"}
-- [https://blog.newrelic.com/2010/02/17/new-relic-ceo-lew-cirne-discusses-how-apdex-reveals-user-frustration-with-your-web-experience](https://blog.newrelic.com/2010/02/17/new-relic-ceo-lew-cirne-discusses-how-apdex-reveals-user-frustration-with-your-web-experience){:target="\_blank"}
-- [https://blog.newrelic.com/2011/01/21/what-should-i-set-my-apdex-goal-to](https://blog.newrelic.com/2011/01/21/what-should-i-set-my-apdex-goal-to){:target="\_blank"}
-- [https://docs.newrelic.com/docs/apm/new-relic-apm/apdex/apdex-measuring-user-satisfaction](https://docs.newrelic.com/docs/apm/new-relic-apm/apdex/apdex-measuring-user-satisfaction){:target="\_blank"}
+- [https://docs.newrelic.com/docs/apm/new-relic-apm/apdex/apdex-measuring-user-satisfaction](https://docs.newrelic.com/docs/apm/new-relic-apm/apdex/apdex-measuring-user-satisfaction)
