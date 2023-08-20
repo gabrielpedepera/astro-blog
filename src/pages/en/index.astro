@@ -12,7 +12,7 @@ import slugify from "@utils/slugify";
 import { SOCIALS } from "@config";
 import { getLangFromUrl } from "@i18n/utils";
 
-const lang = getLangFromUrl(Astro.url);
+const lang = getLangFromUrl(Astro.url) as string;
 const socialCount = SOCIALS.filter(social => social.active).length;
 
 const posts = await getCollection("blog", ({ data }) => data.lang == lang);
@@ -79,6 +79,7 @@ const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
                   href={`/${lang}/posts/${slugify(data)}`}
                   frontmatter={data}
                   secHeading={false}
+                  lang={lang}
                 />
               ))}
             </ul>
@@ -99,6 +100,7 @@ const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
                   href={`/${lang}/posts/${slugify(data)}`}
                   frontmatter={data}
                   secHeading={false}
+                  lang={lang}
                 />
               )
           )
