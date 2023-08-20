@@ -30,7 +30,7 @@ Antes de iniciar o processo será necessário ter instalado o [Vagrant](https://
 $ vagrant plugin install vagrant-vbguest
 ```
 
-![vagrant-vbguest](/public/img/posts/2016/05/23/Screen-Shot-2016-08-24-at-21-37-02.png)
+![vagrant-vbguest](/assets/img/posts/2016/05/23/Screen-Shot-2016-08-24-at-21-37-02.png)
 
 Essa customização será realizada a partir da box [centos/7](https://atlas.hashicorp.com/centos/boxes/7).
 
@@ -42,7 +42,21 @@ Esse comando irá criar o Vagrantfile. Porém será necessário adicionar a conf
 
 Segue abaixo Vagrantfile que utilizei para essa customização com mais algumas configurações. Nesse arquivo estou definindo o IP 192.168.50.4, `config.vm.network :private_network, ip: "192.168.50.4"`, e os diretórios que serão sincronizados entre a máquina local e a virtual `config.vm.synced_folder "~/workspace", "/var/www", nfs: true`. Para esse compartilhamento de diretórios estou utilizando a tecnologia [NFS](https://en.wikipedia.org/wiki/Network_File_System), lembrando que a mesma não funciona no Windows como host.
 
-<script src="https://gist.github.com/gabrielpedepera/e005e5d19d30a73a19f08def44d9f62d.js"></script>
+```ruby
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
+Vagrant.configure(2) do |config|
+  config.vm.box = "centos/7"
+  config.ssh.insert_key = false
+  config.vm.network :private_network, ip: "192.168.50.4"
+  config.vm.synced_folder "~/workspace", "/var/www", nfs: true
+end
+```
 
 ```bash
 $ vagrant up --provider virtualbox
@@ -50,7 +64,7 @@ $ vagrant up --provider virtualbox
 
 Iniciando a máquina, na primeira vez que for executado, será realizado o download da box, e por isso poderá demorar um pouco.
 
-![Download Box](/public/img/posts/2016/05/23/Screen-Shot-2016-08-24-at-22-14-50.png)
+![Download Box](/assets/img/posts/2016/05/23/Screen-Shot-2016-08-24-at-22-14-50.png)
 
 O próximo passo é acessar o seu servidor por SSH.
 
@@ -58,7 +72,7 @@ O próximo passo é acessar o seu servidor por SSH.
 $ vagrant box ssh
 ```
 
-![vagrant-ssh](/public/img/posts/2016/05/23/Screen-Shot-2016-08-24-at-22-16-49.png)
+![vagrant-ssh](/assets/img/posts/2016/05/23/Screen-Shot-2016-08-24-at-22-16-49.png)
 
 Caso tenha problemas nessa etapa, recomendo esse [tutorial](https://nandovieira.com.br/usando-o-vagrant-como-ambiente-de-desenvolvimento-no-windows), escrito pelo [@fnando](https://twitter.com/@fnando).
 
@@ -117,7 +131,7 @@ Verificar se o ruby foi instalado corretamente.
 $ ruby -v
 ```
 
-![rbenv-ruby2.3.1](/public/img/posts/2016/05/23/Screen-Shot-2016-08-24-at-22-42-59.png)
+![rbenv-ruby2.3.1](/assets/img/posts/2016/05/23/Screen-Shot-2016-08-24-at-22-42-59.png)
 
 Instalando o ruby 1.9.3-p550.
 
@@ -127,7 +141,7 @@ $ rbenv install 1.9.3-p550
 
 Obs.: Esse tutorial está utilizando o ruby 1.9.3 apenas como finalidade de exemplo, lembrando que essa versão está descontinuada, e não deve ser utilizada em ambientes de produção, pois não há mais suporte a mesma.
 
-![rbenv-ruby1.9.3](/public/img/posts/2016/05/23/Screen-Shot-2016-08-24-at-23-03-15.png)
+![rbenv-ruby1.9.3](/assets/img/posts/2016/05/23/Screen-Shot-2016-08-24-at-23-03-15.png)
 
 Verificando as versões instaladas.
 
@@ -135,7 +149,7 @@ Verificando as versões instaladas.
 $ rbenv versions
 ```
 
-![rbenv-versions](/public/img/posts/2016/05/23/Screen-Shot-2016-08-24-at-23-03-55.png)
+![rbenv-versions](/assets/img/posts/2016/05/23/Screen-Shot-2016-08-24-at-23-03-55.png)
 
 Dica: Caso você não queira realizar o download da documentação de toda `gem` que instalar, já que esse processo pode ser demorado. Você pode desabilitar isso, através desse comando.
 
@@ -173,29 +187,45 @@ $ export PATH="$ORIG_PATH"
 $ /home/vagrant/.rbenv/versions/2.3.1/bin/ruby /home/vagrant/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/passenger-5.0.28/bin/passenger-install-nginx-module
 ```
 
-![passenger-install-nginx-module](/public/img/posts/2016/05/23/Screen-Shot-2016-08-24-at-23-09-58.png)
+![passenger-install-nginx-module](/assets/img/posts/2016/05/23/Screen-Shot-2016-08-24-at-23-09-58.png)
 
 Agora é só seguir as instruções conforme sua necessidade.
 
 - Ruby é a linguagem que desejamos;
 
-![passenger-ruby](/public/img/posts/2016/05/23/Screen-Shot-2016-08-24-at-23-11-11.png)
+![passenger-ruby](/assets/img/posts/2016/05/23/Screen-Shot-2016-08-24-at-23-11-11.png)
 
 - A opção 1, irá realizar o download, compilar e instalar o NGINX para nós;
 
-![passenger-nginx](/public/img/posts/2016/05/23/Screen-Shot-2016-08-24-at-23-11-45.png)
+![passenger-nginx](/assets/img/posts/2016/05/23/Screen-Shot-2016-08-24-at-23-11-45.png)
 
 - Vamos manter o diretório `/opt/nginx`, como sugerido, portanto basta apertar `enter`;
 
-![passenger-directory](/public/img/posts/2016/05/23/Screen-Shot-2016-08-24-at-23-12-22.png)
+![passenger-directory](/assets/img/posts/2016/05/23/Screen-Shot-2016-08-24-at-23-12-22.png)
 
 - E por fim criar o arquivo `/opt/nginx/conf/nginx.conf`.
 
-![passenger-nginx-conf](/public/img/posts/2016/05/23/Screen-Shot-2016-08-24-at-23-34-42.png)
+![passenger-nginx-conf](/assets/img/posts/2016/05/23/Screen-Shot-2016-08-24-at-23-34-42.png)
 
 Agora vamos adicionar o `systemd` **nginx.service** ao `systemctl` do CentOS, para isso deve salvar o arquivo abaixo em `/lib/systemd/system/nginx.service`.
 
-<script src="https://gist.github.com/gabrielpedepera/b2d7ec16991baca2d285f089da98e837.js"></script>
+```nginx.service
+[Unit]
+Description=The nginx HTTP and reverse proxy server
+After=syslog.target network.target remote-fs.target nss-lookup.target
+
+[Service]
+Type=forking
+PIDFile=/opt/nginx/logs/nginx.pid
+ExecStartPre=/opt/nginx/sbin/nginx -t
+ExecStart=/opt/nginx/sbin/nginx
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s QUIT $MAINPID
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+```
 
 E depois iniciar e habilitar o serviço:
 
@@ -210,7 +240,7 @@ Você pode verificar a situação do NGINX através do comando:
 $ sudo service nginx status
 ```
 
-![nginx-status](/public/img/posts/2016/05/23/Screen-Shot-2016-08-24-at-23-37-24.png)
+![nginx-status](/assets/img/posts/2016/05/23/Screen-Shot-2016-08-24-at-23-37-24.png)
 
 Se ainda estiver como `root`, podemos voltar a utilizar o usuário `vagrant`, e recarregar as configurações contidas no `.bash_profile`.
 
@@ -245,7 +275,82 @@ $ bundle install
 
 Substitua o conteúdo do arquivo `/opt/nginx/conf/nginx.conf` abaixo (Essa edição deve ser utilizada com o usuário **root**):
 
-<script src="https://gist.github.com/gabrielpedepera/b34afa39f1a01cfac19d0f7e2268dad9.js"></script>
+```nginx
+worker_processes  1;
+error_log  /opt/nginx/logs/nginx-error.log info;
+pid        /opt/nginx/logs/nginx.pid;
+
+events {
+    worker_connections  1024;
+}
+
+http {
+    passenger_root /home/vagrant/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/passenger-5.0.28;
+
+    include       mime.types;
+    default_type  application/octet-stream;
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log  /opt/nginx/logs/nginx-access.log  main;
+    sendfile        on;
+    tcp_nopush     on;
+    tcp_nodelay    on;
+    keepalive_timeout  15;
+    server_names_hash_bucket_size 256;
+    server_names_hash_max_size 512;
+    gzip              on;
+    gzip_proxied      any;
+    gzip_http_version 1.1;
+    gzip_comp_level   9;
+    gzip_min_length   0;
+    gzip_buffers      16 8k;
+    gzip_types        image/png image/jpg image/jpeg
+                      image/gif application/javascript text/plain text/css
+                      application/json application/x-javascript text/xml
+                      application/xml application/xml+rss text/javascript
+                      application/atom+xml application/x-shockwave-flash;
+
+    gzip_vary         off;
+    gzip_disable      "MSIE [1-6].(?!.*SV1)";
+    gzip_static       on;
+    output_buffers   1 32k;
+    postpone_output  1460;
+
+    server {
+      listen 80;
+      server_name localhost.dummy;
+      passenger_ruby /home/vagrant/.rbenv/versions/2.3.1/bin/ruby;
+      passenger_enabled on;
+      rails_env development;
+      root /var/www/dummy/public;
+
+            send_timeout 1200;
+            proxy_read_timeout 2400;
+            proxy_send_timeout 2400;
+            proxy_connect_timeout 120;
+            client_header_timeout 900;
+            client_body_timeout 900;
+    }
+
+    server {
+      listen 80;
+      server_name localhost.dummy_old;
+      passenger_ruby /home/vagrant/.rbenv/versions/1.9.3-p550/bin/ruby;
+      passenger_enabled on;
+      rails_env development;
+      root /var/www/dummy_old/public;
+
+            send_timeout 1200;
+            proxy_read_timeout 2400;
+            proxy_send_timeout 2400;
+            proxy_connect_timeout 120;
+            client_header_timeout 900;
+            client_body_timeout 900;
+    }
+}
+```
 
 Reinicialize o serviço NGINX.
 
@@ -263,11 +368,11 @@ Agora é possível acessar as aplicações através do navegador. Veja que é po
 
 Dummy - http://localhost.dummy: (ruby 2.1.3 + rails 4.2.6):
 
-![dummy](/public/img/posts/2016/05/23/Screen_Shot_2016-08-24_at_23_59_53.png)
+![dummy](/assets/img/posts/2016/05/23/Screen_Shot_2016-08-24_at_23_59_53.png)
 
 Dummy Old - http://localhost.dummy_old: (ruby 1.9.3-p550 + rails 3.2.22.2):
 
-![dummy-old](/public/img/posts/2016/05/23/Screen_Shot_2016-08-25_at_00_02_26.png)
+![dummy-old](/assets/img/posts/2016/05/23/Screen_Shot_2016-08-25_at_00_02_26.png)
 
 #### Exportando a nova box
 
@@ -280,13 +385,13 @@ $ cat /dev/null > ~/.bash_history && sudo shutdown -h now
 
 Para empacotar a nova VM, deve se utilizar o comando abaixo, o argumento `--base`recebe o nome da VM no VirtualBox, e `--output` o nome do arquivo a ser gerado.
 
-![virtual-box](/public/img/posts/2016/05/23/Screen_Shot_2016-08-25_at_00_07_46.png)
+![virtual-box](/assets/img/posts/2016/05/23/Screen_Shot_2016-08-25_at_00_07_46.png)
 
 ```bash
 $ vagrant package --base workspace_default_1472086496235_78098 --output vagrant-centos7.box
 ```
 
-![virtual-box](/public/img/posts/2016/05/23/Screen-Shot-2016-08-25-at-00-16-54.png)
+![virtual-box](/assets/img/posts/2016/05/23/Screen-Shot-2016-08-25-at-00-16-54.png)
 
 Se tudo ocorreu bem, você terá uma nova VM provisionada pelo Vagrant, já podendo ser utilizada.
 
