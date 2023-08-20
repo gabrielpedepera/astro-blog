@@ -9,7 +9,7 @@ tags:
   - NGINX
   - Diffy
   - APIs
-ogImage: "/uploads/diffy-diagram.png"
+ogImage: "/assets/diffy-diagram.png"
 description: Diffy e NGINX para migrar APIs com confiança.
 lang: "pt-BR"
 ---
