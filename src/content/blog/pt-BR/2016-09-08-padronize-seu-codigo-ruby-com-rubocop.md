@@ -36,13 +36,40 @@ Porém, também é importante utilizar uma ferramenta que nos ajude a garantir q
 $ gem install rubocop
 ```
 
-![gem-install-rubocop](/public/img/posts/2016/09/08/Screen-Shot-2016-08-25-at-22-26-42.png)
+![gem-install-rubocop](/assets/img/posts/2016/09/08/Screen-Shot-2016-08-25-at-22-26-42.png)
 
 As regras do Rubocop podem ser configuradas ou desabilitadas através do arquivo `.rubocop.yml`, que deve estar na raiz do projeto com as configurações desejadas.
 
 Segue abaixo um exemplo do arquivo `.rubocop.yml` com algumas configurações:
 
-<script src="https://gist.github.com/gabrielpedepera/543d40bd8f9877c15c157a6c6b17b952.js"></script>
+```yaml
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  Exclude:
+    - db/schema.rb
+    - db/migrate/*
+    - bin/*
+  RunRailsCops: true
+
+Documentation:
+  Enabled: false
+
+DotPosition:
+  EnforcedStyle: trailing
+
+Style/EmptyLinesAroundBlockBody:
+  Enabled: false
+
+Style/EmptyLinesAroundModuleBody:
+  Enabled: false
+
+Style/EmptyLinesAroundClassBody:
+  Enabled: false
+
+Style/EmptyLinesAroundMethodBody:
+  Enabled: false
+```
 
 Por exemplo, essa configuração está desconsiderando que linhas vazias entre o início e fim de módulos e blocos sejam violações.
 
@@ -73,7 +100,7 @@ Basicamente, a instalação desses dois pacotes é o suficiente para ter o Subli
 Tools > SublimeLinter > Open User Settings
 ```
 
-![tools-sublime-linter](/public/img/posts/2016/09/08/Screen-Shot-2016-08-31-at-23-39-52.png)
+![tools-sublime-linter](/assets/img/posts/2016/09/08/Screen-Shot-2016-08-31-at-23-39-52.png)
 
 ```json
 {
@@ -85,7 +112,7 @@ Tools > SublimeLinter > Open User Settings
 ...
 ```
 
-![sublime-config](/public/img/posts/2016/09/08/Screen_Shot_2016-08-31_at_23_41_40.png)
+![sublime-config](/assets/img/posts/2016/09/08/Screen_Shot_2016-08-31_at_23_41_40.png)
 
 Obs1.: Nesse caso estou aplicando a configuração em um OSX, caso seu sistema operacional seja outro, basta mudar a configuração para `linux` ou `windows`. Você pode verificar a configuração completa [aqui](https://gist.github.com/gabrielpedepera/c158ecc39f594224a9c41ba0fce53113).
 
@@ -93,11 +120,11 @@ Obs2.: É necessário restartar o Sublime Text para que a configuração seja ap
 
 Você vai saber que a integração funcionou quando abrir seu editor e verificar algumas marcações amarelas no seu código:
 
-![violations-sublime](/public/img/posts/2016/09/08/sublimeLinter.png)
+![violations-sublime](/assets/img/posts/2016/09/08/sublimeLinter.png)
 
 Ao fixar o cursor em uma determinada linha, que está sendo apontada pela marcação, é possível verificar no rodapé do editor a respectiva violação.
 
-![violation-rubocop-sublime](/public/img/posts/2016/09/08/line.png)
+![violation-rubocop-sublime](/assets/img/posts/2016/09/08/line.png)
 
 #### Atom
 
@@ -113,7 +140,7 @@ $ apm install linter
 $ apm install linter-rubocop
 ```
 
-![apm-linter-rubocop](/public/img/posts/2016/09/08/Screen-Shot-2016-08-31-at-22-49-15.png)
+![apm-linter-rubocop](/assets/img/posts/2016/09/08/Screen-Shot-2016-08-31-at-22-49-15.png)
 
 Após a instalação será necessário configurar `PATH` do rubocop. Para isso, podemos editar diretamente o arquivo de configuração em `~/.atom/config.cson`, ou através do menu:
 
@@ -121,7 +148,7 @@ Após a instalação será necessário configurar `PATH` do rubocop. Para isso, 
 Atom > Config...
 ```
 
-![atom-config](/public/img/posts/2016/09/08/Screen-Shot-2016-08-31-at-22-36-08.png)
+![atom-config](/assets/img/posts/2016/09/08/Screen-Shot-2016-08-31-at-22-36-08.png)
 
 Agora vamos verificar onde está o rubocop, através do comando `which`:
 
@@ -129,7 +156,7 @@ Agora vamos verificar onde está o rubocop, através do comando `which`:
 $ which rubocop
 ```
 
-![which](/public/img/posts/2016/09/08/Screen-Shot-2016-08-31-at-22-38-30.png)
+![which](/assets/img/posts/2016/09/08/Screen-Shot-2016-08-31-at-22-38-30.png)
 
 Porém, se você como eu estiver utilizando o `rbenv` deverá executar o seguinte comando:
 
@@ -137,7 +164,7 @@ Porém, se você como eu estiver utilizando o `rbenv` deverá executar o seguint
 $ rbenv which rubocop
 ```
 
-![which-rbenv](/public/img/posts/2016/09/08/Screen-Shot-2016-08-31-at-22-56-03.png)
+![which-rbenv](/assets/img/posts/2016/09/08/Screen-Shot-2016-08-31-at-22-56-03.png)
 
 E adicionar a seguinte configuração, com o respectivo `PATH`:
 
@@ -146,22 +173,22 @@ E adicionar a seguinte configuração, com o respectivo `PATH`:
     command: "/Users/gabriel/.rbenv/versions/2.3.1/bin/rubocop"
 ```
 
-![config-rubocop](/public/img/posts/2016/09/08/Screen-Shot-2016-08-31-at-23-08-36.png)
+![config-rubocop](/assets/img/posts/2016/09/08/Screen-Shot-2016-08-31-at-23-08-36.png)
 
 Semelhante ao Sublime Text 3, também será necessário restartar seu editor, fechando e abrindo novamente o mesmo.
 
 E utilizando o mesmo arquivo como exemplo, podemos ver a integração do rubocop ao Atom:
 
-![atom-rubocop-integrate](/public/img/posts/2016/09/08/Screen_Shot_2016-08-31_at_23_24_32.png)
+![atom-rubocop-integrate](/assets/img/posts/2016/09/08/Screen_Shot_2016-08-31_at_23_24_32.png)
 
 O plugin do Atom oferece algumas funcionalidades legais a mais que ao do Sublime.
 
 Um placeholder informando o tipo da violação:
 
-![atom-paceholder](/public/img/posts/2016/09/08/Screen_Shot_2016-08-31_at_23_24_12.png)
+![atom-paceholder](/assets/img/posts/2016/09/08/Screen_Shot_2016-08-31_at_23_24_12.png)
 
 Um contador e um painel detalhando as violações:
-![count-violations](/public/img/posts/2016/09/08/Screen_Shot_2016-08-31_at_23_43_34.png)
+![count-violations](/assets/img/posts/2016/09/08/Screen_Shot_2016-08-31_at_23_43_34.png)
 
 ## Conclusão
 
