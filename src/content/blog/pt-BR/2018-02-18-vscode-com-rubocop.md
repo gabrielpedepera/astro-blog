@@ -18,11 +18,11 @@ Nos últimos 4 anos vinha utilizando o [Sublime Text](https://www.sublimetext.co
 
 Faz algum tempo que não programava em `ruby`, e estava estudando um pouco esse final de semana o framework de testes [minitest](https://github.com/seattlerb/minitest) (aqui outra mudança, pois estou mais familiarizado com o [rspec](https://github.com/rspec/rspec), e durante esse processo senti falta da integração com o rubocop direto no editor, algo que utlizava [antes](/2016/09/08/padronize-seu-codigo-ruby-com-rubocop.html). E por isso, resolvi fazer uma pausa e integrá-lo ao editor, onde novamente fui surpreendido pela facilidade com que consegui fazer isso.
 
-![meme-zagalo](/public/img/posts/2018/02/18/meme-zagalo.jpg)
+![meme-zagalo](/assets/img/posts/2018/02/18/meme-zagalo.jpg)
 
 Primeira coisa que fiz foi verificar a [documentação do rubocop e suas integrações com outras ferramentas](http://rubocop.readthedocs.io/en/latest/integration_with_other_tools/#visual-studio-code), a qual referencia o seguinte [plugin](https://marketplace.visualstudio.com/items?itemName=rebornix.Ruby) para realizar esse trabalho:
 
-![extension-ruby-vs-code](/assets/imjges/extension-ruby-vs-code.png)
+![extension-ruby-vs-code](/assets/img/posts/2018/02/18/extension-ruby-vs-code.png)
 
 Após a instalação foi necessário habilitar as configurações necessárias para o rubocop funcionar, para fazer isso adicione a configuração abaixo no JSON das opções ("user settings") do seu Visutal Studio Code (`cmd + , `ou `Code > Preferences > Settings`):
 
@@ -37,11 +37,11 @@ Após a instalação foi necessário habilitar as configurações necessárias p
 }
 ```
 
-![rubocop-settings](/public/img/posts/2018/02/18/rubocop-settings.png)
+![rubocop-settings](/assets/img/posts/2018/02/18/rubocop-settings.png)
 
 Feito isso reiniciei o editor (na verdade eu fechei e abri novamente em seguida) e _voilà_:
 
-![rubocop-vscode](/public/img/posts/2018/02/18/rubocop-lint-vscode.png)
+![rubocop-vscode](/assets/img/posts/2018/02/18/rubocop-lint-vscode.png)
 
 ## Conclusão
 
