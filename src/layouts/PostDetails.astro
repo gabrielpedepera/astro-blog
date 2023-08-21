@@ -7,7 +7,7 @@ import Datetime from "@components/Datetime";
 import type { CollectionEntry } from "astro:content";
 import { slugifyStr } from "@utils/slugify";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
-import { DiscussionEmbed } from "disqus-react";
+import { CommentCount } from "disqus-react";
 
 const lang = getLangFromUrl(Astro.url) as string;
 const t = useTranslations(lang);
@@ -60,13 +60,13 @@ const ogUrl = new URL(ogImage ? ogImage : `${title}.png`, Astro.url.origin)
       {tags.map(tag => <Tag name={slugifyStr(tag)} />)}
     </ul>
 
-    <DiscussionEmbed
+    <CommentCount
       shortname="blog-gabrielpedepera"
       config={{
         url: new URL(Astro.url.pathname, Astro.site).href,
         identifier: pubDatetime.valueOf().toString(),
         title: title,
-        language: lang,
+        // language: lang,
       }}
     />
   </main>
