@@ -1,7 +1,7 @@
 ---
 author: Gabriel Pereira
 pubDatetime: 2017-02-11T18:46:33Z
-title: "Apdex: Medindo a Satisfação do Usuário"
+title: Apdex - Medindo a Satisfação do Usuário
 postSlug: apdex-medindo-a-satisfacao-do-usuario
 featured: false
 draft: false
@@ -10,7 +10,7 @@ tags:
   - newrelic
   - metricas
 ogImage: ""
-description: "Apdex: Medindo a Satisfação do Usuário"
+description: Apdex - Medindo a Satisfação do Usuário
 lang: "pt-BR"
 ---
 
