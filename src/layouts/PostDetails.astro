@@ -61,9 +61,9 @@ const ogUrl = new URL(ogImage ? ogImage : `${title}.png`, Astro.url.origin)
     </ul>
 
     <DiscussionEmbed
-      shortname="gabrielpedepera"
+      shortname="blog-gabrielpedepera"
       config={{
-        url: canonicalURL,
+        url: Astro.site?.origin,
         identifier: pubDatetime.valueOf().toString(),
         title: title,
         language: lang,
