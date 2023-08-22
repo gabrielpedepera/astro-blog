@@ -33,6 +33,12 @@ export const SOCIALS: SocialObjects = [
     active: true,
   },
   {
+    name: "StackOverflow",
+    href: "https://stackoverflow.com/users/1729004/gabrielpedepera",
+    linkTitle: `${SITE.title} on Stack Overflow`,
+    active: true,
+  },
+  {
     name: "GitLab",
     href: "https://gitlab.com/gabrielpedepera",
     linkTitle: `${SITE.title} on GitLab`,

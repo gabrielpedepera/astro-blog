@@ -41,4 +41,5 @@ export type SocialMedia =
   | "Telegram"
   | "Mastodon"
   | "Xing"
-  | "BlueSky";
+  | "BlueSky"
+  | "StackOverflow";
