@@ -3,7 +3,7 @@ import { SITE } from "@config";
 import Analytics from "@components/Analytics.astro";
 import "@styles/base.css";
 
-const isProd = import.meta.env.MODE === "production";
+const googleTagId = import.meta.env.GTAG;
 const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 
 export interface Props {
@@ -77,7 +77,7 @@ const socialImageURL = new URL(
       )
     }
 
-    {isProd && <Analytics />}
+    {googleTagId && <Analytics tagId={googleTagId} />}
 
     <script is:inline src="/toggle-theme.js"></script>
   </head>
