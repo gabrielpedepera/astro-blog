@@ -1,4 +1,4 @@
-# Personal Blog - https://gabrielpereira.dev
+# https://gabrielpereira.dev
 
 ## AstroPaper 📄
 
@@ -42,7 +42,6 @@ This theme follows best practices and provides accessibility out of the box. Lig
 Inside of AstroPaper, you'll see the following folders and files:
 
 ```bash
-/
 ├── public/
 │   ├── assets/
 │   │   └── logo.svg
@@ -108,7 +107,7 @@ You can easily add your [Google Site Verification HTML tag](https://support.goog
 PUBLIC_GOOGLE_SITE_VERIFICATION=your-google-site-verification-value
 ```
 
-## Google Analytics
+## Google Analytics (optional)
 
 You can easily add your [Google Analytics](https://analytics.withgoogle.com/) using environment variable. This step is optional. If you don't add the following env variable, the google-analytics tag won't appear in the html `<head>` section.
 
