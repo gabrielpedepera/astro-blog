@@ -2,7 +2,7 @@
 author: Gabriel Pereira
 pubDatetime: 2020-10-28T23:09:00Z
 title: Migrando APIs utilizando Diffy e NGINX
-postSlug: migrando-apis-utilizando-diffy-e-nginx/
+postSlug: migrando-apis-utilizando-diffy-e-nginx
 featured: false
 draft: false
 tags:
@@ -11,6 +11,7 @@ tags:
   - APIs
 ogImage: "/assets/diffy-diagram.png"
 description: Diffy e NGINX para migrar APIs com confiança.
+canonicalURL: https://www.gabrielpereira.dev/pt_br/2020/10/20/migrando-apis-utilizando-diffy-e-nginx
 lang: "pt-BR"
 ---
 

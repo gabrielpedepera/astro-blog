@@ -14,6 +14,7 @@ tags:
   - ansible
 ogImage: ""
 description: Ambiente de desenvolvimento com Vagrant e Ansible
+canonicalURL: https://www.gabrielpereira.dev/pt_br/2017/07/09/ambiente-de-desenvolvimento-com-vagrant-e-ansible
 lang: "pt-BR"
 ---
 

@@ -11,6 +11,7 @@ tags:
   - dependencies
 ogImage: ""
 description: Don't let dependencies break your window
+canonicalURL: https://www.gabrielpereira.dev/en/2022/02/09/don-t-let-dependencies-break-your-window
 lang: "en"
 ---
 

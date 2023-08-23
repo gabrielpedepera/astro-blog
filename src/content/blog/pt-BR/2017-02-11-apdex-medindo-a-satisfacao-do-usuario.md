@@ -11,6 +11,7 @@ tags:
   - metricas
 ogImage: ""
 description: Apdex - Medindo a Satisfação do Usuário
+canonicalURL: https://www.gabrielpereira.dev/pt_br/2017/02/11/apdex-medindo-a-satisfacao-do-usuario
 lang: "pt-BR"
 ---
 

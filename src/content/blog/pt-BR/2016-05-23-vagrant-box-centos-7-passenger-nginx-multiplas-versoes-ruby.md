@@ -11,6 +11,7 @@ tags:
   - virtualbox
 ogImage: ""
 description: "Criando sua Vagrant Box: CentOS 7 + Passenger + NGINX + Múltiplas Versões Ruby (rbenv) e Rails"
+canonicalURL: http://gabrielpereira.dev/pt_br/2016/05/23/vagrant-box-centos-7-passenger-nginx-multiplas-versoes-ruby
 lang: "pt-BR"
 ---
 

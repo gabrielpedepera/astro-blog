@@ -11,6 +11,7 @@ tags:
   - NGINX
 ogImage: ""
 description: Diffy and NGINX for migrating APIs with safety
+canonicalURL: https://www.gabrielpereira.dev/en/2020/11/05/migrating-apis-using-diffy-and-nginx
 lang: "en"
 ---
 

@@ -11,6 +11,7 @@ tags:
   - rubocop
 ogImage: ""
 description: "Visual Studio Code + Rubocop"
+canonicalURL: https://www.gabrielpereira.dev/pt_br/2018/02/18/vscode-com-rubocop
 lang: "pt-BR"
 ---
 

@@ -12,6 +12,7 @@ tags:
   - sublime-text-3
 ogImage: ""
 description: Padronize seu código Ruby com Rubocop
+canonicalURL: https://www.gabrielpereira.dev/pt_br/2016/09/08/padronize-seu-codigo-ruby-com-rubocop
 lang: "pt-BR"
 ---
 
