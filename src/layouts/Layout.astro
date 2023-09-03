@@ -5,6 +5,7 @@ import "@styles/base.css";
 
 const googleTagId = import.meta.env.GTAG;
 const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
+const goSquaredTagId = import.meta.env.GO_SQUARED_TAG;
 
 export interface Props {
   title?: string;
@@ -77,7 +78,7 @@ const socialImageURL = new URL(
       )
     }
 
-    {googleTagId && <Analytics tagId={googleTagId} />}
+    <Analytics googleTagId={googleTagId} goSquaredTagId={goSquaredTagId} />
 
     <script is:inline src="/toggle-theme.js"></script>
   </head>
