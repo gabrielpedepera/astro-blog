@@ -1,10 +1,10 @@
 ---
 author: Gabriel Pereira
-pubDatetime: 2020-11-05T00:00:00Z
+pubDatetime: 2023-11-27T00:00:00Z
 title: Protecting sensitive data in Elixir GenServers
 postSlug: protecting-sensitive-data-in-elixir-gen-servers
 featured: false
-draft: true
+draft: false
 tags:
   - Elixir
   - GenServers
@@ -20,7 +20,75 @@ In this blog post, we’ll explore two techniques to protect sensitive data in E
 
 To illustrate this, let’s take a look at a GenServer that is handling some sensitive data. (I ended up writing a GenServer quite long for a blog post. However, I hope that this example can help to understand the different ways of hiding sensitive data in a GenServer, and the trade-offs involved in each approach)
 
-<script src="https://gist.github.com/gabrielpedepera/57d5014330a446a00bdf4827262f14c7.js"></script>
+```elixir
+defmodule SecurityTokenManager do
+  use GenServer
+
+  defstruct [:access_key, :secret_access, :security_token, :expires_at]
+
+  @security_token_size 20
+  @milliseconds_in_second 1000
+  @expires_in_seconds 60 * 15 # 15 minutes
+
+  def start_link do
+    GenServer.start_link(
+      __MODULE__,
+      %{
+        access_key: System.get_env("ACCESS_KEY"),
+        secret_access: System.get_env("SECRET_ACCESS")
+      },
+      name: __MODULE__
+    )
+  end
+
+  def get_security_token do
+    GenServer.call(__MODULE__, :get_security_token)
+  end
+
+  def handle_call(:get_security_token, _from, state) do
+    {:reply, state.security_token, state}
+  end
+
+  def handle_info(:refresh_token, state) do
+    {security_token, expires_at} =
+      generate_security_token(state.access_key, state.secret_access)
+
+    schedule_refresh_token(expires_at)
+
+    new_state = %{state | security_token: security_token, expires_at: expires_at}
+    {:noreply, new_state}
+  end
+
+  def init(args) do
+    schedule_refresh_token(DateTime.utc_now())
+
+    {:ok, %__MODULE__{access_key: args[:access_key], secret_access: args[:secret_access]}}
+  end
+
+  # This function simulates an authentication process where `access_key` and `secret_access` are provided
+  # to a downstream service, which in turn returns a `security_token` along with its `expires_at timestamp.
+  defp generate_security_token(_access_key, _secret_access) do
+    {security_token(), expires_at()}
+  end
+
+  defp schedule_refresh_token(expires_at) do
+    current_time = DateTime.utc_now()
+    time_difference = DateTime.diff(expires_at, current_time)
+
+    # Send a `:refresh_token message after the time difference in seconds
+    Process.send_after(self(), :refresh_token, time_difference * @milliseconds_in_second)
+  end
+
+  # generates a random token for demonstration purposes.
+  defp security_token do
+    :crypto.strong_rand_bytes(@security_token_size) |> Base.encode64()
+  end
+
+  defp expires_at do
+    DateTime.utc_now() |> DateTime.add(@expires_in_seconds)
+  end
+end
+```
 
 Basically this GenServer acts like a diligent security guard managing a special “security token” that expires every 15 minutes. It doesn’t wait for the token to expire, but proactively starts a countdown to refresh the token just before expiration. When another process requests the token via the `get_security_token` function, it ensures the token is valid before handing it over. This creates a seamless cycle of token issuance, countdown, and renewal, ensuring a valid token is always available.
 
